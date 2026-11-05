@@ -226,8 +226,8 @@ if __name__ == "__main__":
     os.makedirs(output_dir, exist_ok=True)
     
     files_config = [
-        {"filename": "HUYỆN KRÔNG NÔ.xlsx", "prefix": "KN"},
-        {"filename": "HUYỆN DAK MIL.xlsx", "prefix": "DM"},
+        # {"filename": "HUYỆN KRÔNG NÔ.xlsx", "prefix": "KN"},
+        # {"filename": "HUYỆN DAK MIL.xlsx", "prefix": "DM"},
         {"filename": "HUYỆN CƯ JUT.xlsx", "prefix": "CJ"},
         {"filename": "Huyện Đắk Glong.xlsx", "prefix": "DGL"},
         {"filename": "HUYỆN ĐẮK RLẤP.xlsx", "prefix": "DRL"},
