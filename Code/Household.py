@@ -20,7 +20,7 @@ for file in file_list:
   ].copy()
   df_chuho.rename(
       columns={
-          "GIOI_TINH": "GIOI_TINH_CHU_HO",
+          "GIOI_TINH" : "GIOI_TINH_CHU_HO",
           "TUOI": "TUOI_CHU_HO",
           "DANTOC": "DANTOC_CHU_HO",
       },
