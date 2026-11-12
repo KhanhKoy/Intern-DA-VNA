@@ -248,7 +248,7 @@ Kịch bản xây dựng bộ đặc trưng độc lập cho mô hình phân lo�
 
 ---
 
-## 4. Hướng dẫn Triển khai Cơ sở Dữ liệu (PostgreSQL DDL & Data Load)
+<!-- ## 4. Hướng dẫn Triển khai Cơ sở Dữ liệu (PostgreSQL DDL & Data Load)
 
 Mở **pgAdmin 4** (hoặc công cụ dòng lệnh `psql`), tạo database mới (ví dụ: `daknong_dwh`), mở Query Tool và thực thi script SQL sau:
 
@@ -324,7 +324,7 @@ Cần import dữ liệu theo đúng thứ tự ràng buộc khóa ngoại (Fore
 \copy Dim_Household_Status(STATUS_ID, STATUS_NAME) FROM 'Star_Schema_DB_Ready/Dim_Household_Status.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');
 \copy Dim_Demographic(DEMO_ID, DEMO_NAME) FROM 'Star_Schema_DB_Ready/Dim_Demographic.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');
 \copy Dim_Geography(GEO_ID, HUYEN, XA) FROM 'Star_Schema_DB_Ready/Dim_Geography.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');
-\copy Fact_Household(ID_HO_GLOBAL, QUY_MO_HO, LAO_DONG_CHINH, PHU_THUOC, TUOI_CHU_HO, GIOI_TINH_CHU_HO, STATUS_ID, DEMO_ID, GEO_ID) FROM 'Star_Schema_DB_Ready/Fact_Household.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');
+\copy Fact_Household(ID_HO_GLOBAL, QUY_MO_HO, LAO_DONG_CHINH, PHU_THUOC, TUOI_CHU_HO, GIOI_TINH_CHU_HO, STATUS_ID, DEMO_ID, GEO_ID) FROM 'Star_Schema_DB_Ready/Fact_Household.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8'); -->
 ```
 
 ---
@@ -337,27 +337,27 @@ Cần import dữ liệu theo đúng thứ tự ràng buộc khóa ngoại (Fore
 | **Tổng nhân khẩu sau làm sạch cơ bản** | 107.398 dòng | 8 file `*_CLEANED.xlsx` trong `Cleaned_Data_Master/` |
 | **Tổng nhân khẩu sau khử trùng lặp toàn tỉnh** | **101.623** người | `DAK_NONG_MASTER_POPULATION.csv` |
 | **Tổng số hộ gia đình đăng ký cấp huyện** | **23.387** hộ | `Household_Data/` & `DAK_NONG_HOUSEHOLDS_MASTER.csv` |
-| **Tổng số bản ghi trong Fact Table** | **23.387** hộ | `Star_Schema_DB_Ready/Fact_Household.csv` |
+<!-- | **Tổng số bản ghi trong Fact Table** | **23.387** hộ | `Star_Schema_DB_Ready/Fact_Household.csv` |
 | **Số lượng địa bàn xã/phường chuẩn hóa** | **143** địa bàn | `Star_Schema_DB_Ready/Dim_Geography.csv` |
 | **Số nhóm dân tộc ghi nhận thực tế** | **27** nhóm | `Star_Schema_DB_Ready/Dim_Demographic.csv` |
-| **Số lượng trạng thái hộ phân loại** | **3** trạng thái | `Star_Schema_DB_Ready/Dim_Household_Status.csv` |
+| **Số lượng trạng thái hộ phân loại** | **3** trạng thái | `Star_Schema_DB_Ready/Dim_Household_Status.csv` | -->
 | **Tổng số hộ gia đình trong tập dữ liệu ML** | **22.698** hộ | `DAK_NONG_ML_DATASET.csv` |
 | **Số đặc trưng đầu vào cho ML** | **15** features | `DAK_NONG_ML_DATASET.csv` |
 
 ---
 
-## 6. Hướng Phát triển Tiếp theo (Next Steps)
+## 6. Quy trình huấn luyện mô hình
 
-1. **Phân hệ BI & Dashboard (Power BI / PostgreSQL):**
+<!-- 1. **Phân hệ BI & Dashboard (Power BI / PostgreSQL):**
    * Kết nối Power BI với PostgreSQL hoặc import trực tiếp 4 file CSV từ `Star_Schema_DB_Ready/`.
    * Thiết lập quan hệ hình sao: `1-Many` (Single Direction) từ `Dim_Geography (GEO_ID)`, `Dim_Household_Status (STATUS_ID)`, `Dim_Demographic (DEMO_ID)` tới `Fact_Household`.
    * Xây dựng các biểu đồ KPI chính:
      * Bản đồ tỷ lệ hộ nghèo/cận nghèo theo Huyện và Xã.
      * Cây phân rã nguyên nhân (Decomposition Tree) kết hợp quy mô hộ, số lao động chính và số người phụ thuộc.
-     * Phân bố nghèo đói theo độ tuổi và nhóm dân tộc của chủ hộ.
+     * Phân bố nghèo đói theo độ tuổi và nhóm dân tộc của chủ hộ. -->
 2. **Phân hệ Khoa học Dữ liệu & AI (Machine Learning):**
    * Sử dụng tập dữ liệu `DAK_NONG_ML_DATASET.csv`.
    * Chia tập dữ liệu Train/Test theo phân tầng (Stratified K-Fold) dựa trên nhãn mục tiêu `PHAN_LOAI_HO`.
-   * Thử nghiệm các mô hình phân loại: Logistic Regression (baseline), Random Forest, LightGBM, CatBoost và XGBoost Classifier.
+   * Thử nghiệm mô hình phân loại:XGBoost Classifier.
    * Đánh giá độ tin cậy bằng các độ đo: F1-macro, Balanced Accuracy, ROC-AUC (do dữ liệu có sự mất cân bằng giữa hộ nghèo, cận nghèo và hộ thường).
    * Ứng dụng **SHAP (SHapley Additive exPlanations)** để giải thích độ quan trọng của các đặc trưng (Feature Importance), qua đó làm rõ những yếu tố then chốt (như tỷ lệ phụ thuộc, loại hình gia đình, tỷ lệ nghèo của địa bàn xã) tác động đến nguy cơ nghèo đói tại tỉnh Đắk Nông.
