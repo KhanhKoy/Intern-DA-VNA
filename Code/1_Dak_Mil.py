@@ -182,7 +182,7 @@ def process_dakmil_ultimate_fix(input_filepath, output_filepath):
 
 if __name__ == "__main__":
     input_file = r"Dữ liệu chuẩn hóa\CẬP NHẬT 20.9.2023\HUYỆN DAK MIL.xlsx" 
-    output_dir = "Cleaned_Data_All"
+    output_dir = "Cleaned_Data_Master"
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, "HUYỆN DAK MIL_CLEANED.xlsx")
     
